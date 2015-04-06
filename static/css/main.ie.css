@@ -5,12 +5,12 @@
    Master Less File
    ========================================================================== */
 
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 /**
  * 1. Set default font family to sans-serif.
- * 2. Prevent iOS text size adjust after orientation change, without disabling
- *    user zoom.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
  */
 
 html {
@@ -83,7 +83,7 @@ audio:not([controls]) {
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
  */
 
 [hidden],
@@ -103,7 +103,8 @@ a {
 }
 
 /**
- * Improve readability when focused and also mouse hovered in all browsers.
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
  */
 
 a:active,
@@ -221,8 +222,8 @@ figure {
  */
 
 hr {
-  -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -372,17 +373,18 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /**
  * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
- *    (include `-moz` to future-proof).
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
  */
 
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
-  /* 2 */
+  /* 1 */
+  -moz-box-sizing: content-box;
+  /* 1 */
   box-sizing: content-box;
+  /* 2 */
 }
 
 /**
@@ -3433,6 +3435,7 @@ textarea.success {
   font-style: normal;
 }
 
+.cf-icon,
 .cf-icon {
   font-family: 'CFPB Minicons';
   display: inline-block;
@@ -4774,6 +4777,14 @@ textarea.success {
         markup: |
           <span class="cf-icon cf-icon-play"></span>
           <span class="cf-icon cf-icon-play-round"></span>
+      - name: history
+        markup: |
+          <span class="cf-icon cf-icon-history"></span>
+          <span class="cf-icon cf-icon-history-round"></span>
+      - name: table of contents
+        markup: |
+          <span class="cf-icon cf-icon-table-of-contents"></span>
+          <span class="cf-icon cf-icon-table-of-contents-round"></span>
       - name: newspaper
         markup: |
           <span class="cf-icon cf-icon-newspaper"></span>
@@ -4810,6 +4821,22 @@ textarea.success {
         markup: |
           <span class="cf-icon cf-icon-date"></span>
           <span class="cf-icon cf-icon-date-round"></span>
+      - name: closing-quote
+        markup: |
+          <span class="cf-icon cf-icon-closing-quote"></span>
+          <span class="cf-icon cf-icon-closing-quote-round"></span>
+      - name: livestream
+        markup: |
+          <span class="cf-icon cf-icon-livestream"></span>
+          <span class="cf-icon cf-icon-livestream-round"></span>
+      - name: parents
+        markup: |
+          <span class="cf-icon cf-icon-parents"></span>
+          <span class="cf-icon cf-icon-parents-round"></span>
+      - name: servicemembers
+        markup: |
+          <span class="cf-icon cf-icon-servicemembers"></span>
+          <span class="cf-icon cf-icon-servicemembers-round"></span>
     tags:
       - cf-icons
 */
@@ -5150,6 +5177,38 @@ textarea.success {
   *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e641');
 }
 
+.cf-icon-history:before {
+  content: "\e642";
+}
+
+.lt-ie8 .cf-icon-history {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e642');
+}
+
+.cf-icon-history-round:before {
+  content: "\e643";
+}
+
+.lt-ie8 .cf-icon-history-round {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e643');
+}
+
+.cf-icon-table-of-contents:before {
+  content: "\e644";
+}
+
+.lt-ie8 .cf-icon-table-of-contents {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e644');
+}
+
+.cf-icon-table-of-contents-round:before {
+  content: "\e645";
+}
+
+.lt-ie8 .cf-icon-table-of-contents-round {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e645');
+}
+
 .cf-icon-newspaper:before {
   content: "\e700";
 }
@@ -5292,6 +5351,70 @@ textarea.success {
 
 .lt-ie8 .cf-icon-date-round {
   *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e719');
+}
+
+.cf-icon-closing-quote:before {
+  content: "\e720";
+}
+
+.lt-ie8 .cf-icon-closing-quote {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e720');
+}
+
+.cf-icon-closing-quote-round:before {
+  content: "\e721";
+}
+
+.lt-ie8 .cf-icon-closing-quote-round {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e721');
+}
+
+.cf-icon-livestream:before {
+  content: "\e722";
+}
+
+.lt-ie8 .cf-icon-livestream {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e722');
+}
+
+.cf-icon-livestream-round:before {
+  content: "\e723";
+}
+
+.lt-ie8 .cf-icon-livestream-round {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e723');
+}
+
+.cf-icon-parents:before {
+  content: "\e724";
+}
+
+.lt-ie8 .cf-icon-parents {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e724');
+}
+
+.cf-icon-parents-round:before {
+  content: "\e725";
+}
+
+.lt-ie8 .cf-icon-parents-round {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e725');
+}
+
+.cf-icon-servicemembers:before {
+  content: "\e726";
+}
+
+.lt-ie8 .cf-icon-servicemembers {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e726');
+}
+
+.cf-icon-servicemembers-round:before {
+  content: "\e727";
+}
+
+.lt-ie8 .cf-icon-servicemembers-round {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e727');
 }
 
 /* topdoc
