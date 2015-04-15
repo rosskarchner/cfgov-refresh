@@ -1100,3 +1100,24 @@ textarea.input__long {
     name: EOF
     eof: true
 */
+
+
+/* topdoc
+  name: Optimal Measuer
+  family: cf-enhancements
+  notes:
+    - "Sets all text elems to an optimal measure for readability"
+  tags:
+    - cf-typography
+*/
+@optimal-measuer: 40em;
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+p, li, dt, dd, figcaption {
+    max-width: @optimal-measuer;
+}
+/* topdoc
+    name: EOF
+    eof: true
+*/
