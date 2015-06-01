@@ -30,6 +30,7 @@ Given the `MAJOR.MINOR.PATCH` pattern, here is how we decide to increment:
 - Added DL styles to cf-enhancements.
 - Added `offices/project-catalyst`.
 - Careers processor/mapping/query
+- Transitioned Capital Framework dependency to v1.0.0 in bower.json.
 
 ### Changed
 - Updated primary navigation to match new mega menu design.
