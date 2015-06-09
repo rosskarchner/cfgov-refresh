@@ -76,6 +76,14 @@
 {% block css %}
 <!--[if lt IE 9]>      <link rel="stylesheet" href="/static/css/main.ie.css"> <![endif]-->
 <!--[if gt IE 8]><!--> <link rel="stylesheet" href="/static/css/main.css"> <!--<![endif]-->
+{# TODO: Resolve slick font issue.
+         For the slick stylesheet to pick up its font and img reference the
+         fonts and images found at /src/vendor/slick-carousel/slick/ should
+         be included in same directory as slick.css.
+         However, including the slick fonts makes the dots on the
+         /the-bureau/ page at mobile sizes enormous.
+#}
+<link rel="stylesheet" href="/static/css/slick.css">
 {% endblock css %}
 
 <!--
@@ -160,14 +168,14 @@
 </div>
 
 <div class="sliding-nav">
-    {% block primary_nav %}
-        {% include "templates/primary-nav.html" %}
-    {% endblock primary_nav %}
-
     <div class="sliding-nav_page">
     {% block header %}
         {% include "templates/header.html" %}
     {% endblock header %}
+
+    {% block primary_nav %}
+        {% include "templates/primary-nav.html" %}
+    {% endblock primary_nav %}
 
     <!-- PRIMARY CONTENT -->
     {% block content %}

@@ -10,7 +10,7 @@
             <li class="list_item list-expanding_list-item">
                 {%- if first_level|length > 0 %}
                 {# TODO: Make this a <button>, it is not a real link. #}
-                <a class="list_link list-expanding_trigger" href="#">
+                <a class="list_link list-expanding_trigger content-show" href="#">
                     {{ top_level }}
                 </a>
                 <div class="desktop-menu_full-wrapper">
@@ -22,7 +22,7 @@
                                    list-expanding list-expanding_child-list">
                             {%- for href, id, caption in first_level %}
                             <li class="list_item list-expanding_list-item">
-                                <a class="list_link" href="{{ href|e }}">{{ caption|e }}</a>
+                                <a class="list_link" href="{{ href|e }}" data-content=".nodes{{ loop.index }}">{{ caption|e }}</a>
                             </li>
                             {%- endfor %}
                         </ul>
@@ -38,3 +38,26 @@
         </ul><!-- END .primary-nav_top-level-list -->
     </nav><!-- END .primary-nav -->
 </div><!-- END .sliding-nav_nav -->
+
+{#
+        <div id="content-slider-container">
+            <div id="content-slider">
+                <div>
+                    <ul class="list__links">
+                    {% for category in ['Divisions', 'Office of the Director'] %}
+                        <li>
+                            <button class="link-text
+                                           jump-link
+                                           jump-link__right
+                                           jump-link__bg
+                                           content-show"
+                                    data-content=".nodes{{ loop.index }}">
+                                {{ category }}
+                            </button>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+#}

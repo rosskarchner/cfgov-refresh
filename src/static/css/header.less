@@ -251,12 +251,6 @@
         background: @white;
         transition: .2s margin-right ease-in, .2s box-shadow ease-in;
     }
-    .is-open .sliding-nav_page {
-        border-left: 1px solid @gray-80;
-        margin-right: -80%;
-        position: relative;
-        box-shadow: -6px 0 0 rgba(16, 24, 32, 0.2);
-    }
 
     // This overlays the main content and when clicked closes the menu.
     .sliding-nav_page-overlay {
@@ -291,9 +285,8 @@
     }
 
     .sliding-nav_nav {
-        float: left;
-        width: 80%;
-        height: 101%;
+        position: absolute;
+        width: 100%;
         margin-left: -100%;
         -webkit-transition: .2s margin-left ease-in;
     }
