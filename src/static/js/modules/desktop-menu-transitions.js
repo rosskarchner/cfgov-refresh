@@ -10,7 +10,7 @@ var $ = require( 'jquery' );
 function init() {
   var $desktopMenu = $( '.primary-nav' ),
       $desktopMenuTrigger = $( '.primary-nav_top-level-list > li' ),
-      $desktopMenuChild = $( '.desktop-menu_full-wrapper' ),
+      $desktopMenuChild = $( '.sub-nav_wrapper' ),
       mouseIsInsideMenu = false,
       mouseIsInsideMenuItem = false,
       aMenuItemWasOpened = false,
@@ -33,11 +33,18 @@ function init() {
     $desktopMenu.addClass( 'has-transition' );
   } );
 
+  $desktopMenuTrigger.click( function() {
+    if ( !isSmall ) {
+      var isExpanded = $desktopMenuChild.attr( 'aria-expanded') === 'true';
+      $desktopMenuChild.attr( 'aria-expanded', !isExpanded );
+    }
+  } );
+
   $desktopMenuTrigger.mouseenter( function() {
 
     if ( !isSmall ) {
       // Update aria-expanded
-      $( this ).find( '.desktop-menu_full-wrapper' ).attr( 'aria-expanded', 'true' );
+      $desktopMenuChild.attr( 'aria-expanded', 'true' );
 
       // Show the child list, previously hidden by default for the mobile menu.
       $( '.list-expanding_child-list' ).show();
