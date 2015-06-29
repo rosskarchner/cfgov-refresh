@@ -35,7 +35,7 @@ function init() {
 
   $desktopMenuTrigger.click( function() {
     if ( !isSmall ) {
-      var isExpanded = $desktopMenuChild.attr( 'aria-expanded') === 'true';
+      var isExpanded = $desktopMenuChild.attr( 'aria-expanded' ) === 'true';
       $desktopMenuChild.attr( 'aria-expanded', !isExpanded );
     }
   } );
