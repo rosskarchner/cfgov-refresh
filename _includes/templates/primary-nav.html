@@ -8,7 +8,7 @@
         {%- for nav_title, sub_nav_title, sub_nav_media, sub_nav_items in vars.nav_items %}
             <li class="list_item list-expanding_list-item">
                 {%- if sub_nav_items|length > 0 %}
-                  {% include '/templates/sub-nav.html' %}
+                    {% include '/templates/sub-nav.html' %}
                 {%- else %}
                     <a class="list_link list_link__disabled">
                         {{ nav_title }}
