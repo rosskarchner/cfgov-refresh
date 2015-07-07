@@ -47,7 +47,7 @@ function init() {
       $desktopMenuChild.attr( 'aria-expanded', 'true' );
 
       // Show the child list, previously hidden by default for the mobile menu.
-      $( '.list-expanding_child-list' ).show();
+      $( '.list-expanding_child-list' ).css('display', 'inline-block');
 
       if ( aMenuItemWasOpened === false ) {
         $desktopMenu.addClass( 'has-transition' );

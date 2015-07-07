@@ -1,9 +1,25 @@
-{# TODO: Make this a <button>, it is not a real link. #}
-<a class="list_link list-expanding_trigger" href="#">
-    {{ nav_title }}
-</a>
+{# ==========================================================================
+
+   sub-nav()
+
+   ==========================================================================
+
+   Description:
+
+   Creates sub-nav markup when given:
+
+   sub_nav_title:  A string used for the sub nav title.
+
+   sub_nav_items:  An array of tuples.
+
+   sub_nav_media:  A string composed of html markup.
+
+   ========================================================================== #}
+
+{% macro render(sub_nav_title, sub_nav_items, sub_nav_media) %}
 <div class="sub-nav_wrapper">
-    <div class="sub-nav_inner-wrapper wrapper">
+    <div class="sub-nav_inner-wrapper
+                wrapper">
         <section class="sub-nav_menu">
             <h4 class="sub-nav_title u-show-on-desktop">
                 {{ sub_nav_title }}
@@ -37,3 +53,4 @@
         </aside>
     </div>
 </div>
+{% endmacro %}

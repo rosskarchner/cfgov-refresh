@@ -9,6 +9,7 @@
 #}
 
 {% import "templates/nav-about-us-media.html" as about_us_media %}
+
 {% set nav_tbd =  ('TBD Content', '', '', []) %}
 {% set sub_nav_tbd =  ('', '', 'TBD Content') %}
 {% set nav_items = [
@@ -19,7 +20,9 @@
         (
             ('/the-bureau/', 'the-bureau', 'The Bureau'),
             ('/budget/', 'budget', 'Budget and Strategy'),
-            sub_nav_tbd,
+            ('/offices/payments-to-harmed-consumers/',
+             'payments-to-harmed-consumers',
+             'Payments to Harmed<br>Consumers'),
             sub_nav_tbd
         ),
         (
