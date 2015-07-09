@@ -5,37 +5,80 @@
   Format: navigation title {{ string }},
           sub-navigation title {{ string }},
           sub-navigation media {{ HTML string }},
-          sub-navigation items {{ array of tuples }}
+          sub-navigation items {{ array of tuples}}
 #}
 
 {% import "templates/nav-about-us-media.html" as about_us_media %}
-
 {% set nav_tbd =  ('TBD Content', '', '', []) %}
 {% set sub_nav_tbd =  ('', '', 'TBD Content') %}
 {% set nav_items = [
-    nav_tbd,
-    nav_tbd,
-    nav_tbd,
-    ('About', 'About Overview', about_us_media , [
+    ('Inside the CFPB', '', '', [
         (
-            ('/the-bureau/', 'the-bureau', 'The Bureau'),
-            ('/budget/', 'budget', 'Budget and Strategy'),
-            ('/offices/payments-to-harmed-consumers/',
-             'payments-to-harmed-consumers',
-             'Payments to Harmed<br>Consumers'),
-            sub_nav_tbd
+            ('/the-bureau/', 'the-bureau', 'About Us'),
+            ('/jobs/', 'jobs', 'Jobs'),
+            ('/contact-us/', 'contact-us', 'Contact Us'),
+            ('/newsroom/', 'newsroom', 'Newsroom')
+        ),
+        (
+            ('/reports/', 'reports', 'Reports'),
+            ('/budget/', 'budget', 'Budget & Performance'),
+            ('/strategic-plan/', 'strategic-plan', 'Strategic plan')
         ),
         (
             ('/blog/', 'blog', 'Blog'),
-            ('/newsroom/', 'newsroom', 'Newsroom'),
-            ('/events/', 'events', 'Events'),
-            ('/activity-log/', 'activity-log', 'Activity Log')
+            ('/advisory-groups/', 'advisory-groups', 'Advisory Groups'),
+            ('/doing-business-with-us/', 'doing-business-with-us', 'Doing Business With Us')
+        )
+    ]),
+    ('Get Assistance', '', '', [
+        (
+            ('/askcfpb/', 'askcfpb', 'Ask CFPB'),
+            ('/paying-for-college/', 'paying-for-college', 'Paying for College'),
+            ('/owning-a-home/', 'owning-a-home', 'Owning a Home'),
+            ('/mortgagehelp/', 'mortgate-help', 'Trouble Paying Your Mortgage?'),
+            ('/app/account/complaints/list/', 'complaint-status', 'Check the Status of a Complaint')
         ),
         (
-            ('/careers/', 'careers', 'Careers'),
-            ('/doing-business-with-us/', 'doing-business-with-us', 'Doing Business With Us'),
-            ('/offices/cfpb-ombudsman/', 'cfpb-ombudsman', 'CFPB Ombudsman'),
-            ('/contact-us/', 'contact-us', 'Contact Us')
+            ('/fair-lending/', 'fair-lending', 'Protections Against Credit Discrimination'),
+            ('/studens/', 'students', 'Information for students'),
+            ('/older-americans/', 'older-americans', 'Information for Older Americans'),
+            ('/servicemembers/', 'servicemembers', 'Information for Servicemembers & Veterans')
+        ),(
+            ('/small-financial-services-providers/', 'small-financial-services-providers', 'Information for Community banks & Credit Unions'),
+            ('/empowerment/', 'empowerment', 'Information for Economically Vulnerable Consumers')
+        )
+    ]),
+    ('Participate', '', '', [
+        (
+            ('/credit-cards/knowbeforeyouowe/', 'credit-cards', 'Know Before You Owe - Credit Cards'),
+            ('/knowbeforeyouowe/', 'mortgages', 'Know Before You Owe - Mortgages'),
+            ('/student-loans/knowbeforeyouowe', 'student-loans', 'Know Before You Owe - Student Loans')
+        ),
+        (
+            ('/your-story/', 'your-story', 'Tell Your Story'),
+            ('/complaintdatabase/', 'complaint-database', 'Consumer Complaint Database'),
+            ('/hmda/', 'hmda', 'Home Mortgage Disclosure Act Database'),
+            ('/open/', 'open-government', 'Open Government')
+        ),
+        (
+            ('/leadership-calendar/', 'leadership-calendar', 'Leadership Calendar'),
+            ('/foia/', 'foia', 'FOIA'),
+            ('/notice-and-comment', 'notice-comment', 'Weigh in on our rule making')
+        )
+    ]),
+    ('Law & Regulation', '', '', [
+        (
+            ('/guidance/supervision/manual/', 'examination-manual', 'Examination Manual'),
+            ('/guidance/', 'guidance', 'Guidance'),
+            ('/notice-and-comment/', 'notice-comment', 'Notice & Comment')
+        ),
+        (
+            ('/regulations/', 'regulations', 'Regulations'),
+            ('/regulatory-implementation/', 'regulatory-implementation', 'Regulatory Implementation')
+        ),
+        (
+            ('/administrativeadjudication/', 'administrative-adjudication', 'Administrative Adjudication'),
+            ('/amicus/', 'amicus', 'Amicus Brief')
         )
     ])
 ] -%}

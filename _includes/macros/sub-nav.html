@@ -17,14 +17,16 @@
    ========================================================================== #}
 
 {% macro render(sub_nav_title, sub_nav_items, sub_nav_media) %}
-<div class="sub-nav_wrapper">
+<div class="sub-nav_wrapper js-sub-nav">
     <div class="sub-nav_inner-wrapper
                 wrapper">
         <section class="sub-nav_menu">
+        {#
             <h4 class="sub-nav_title u-show-on-desktop">
                 {{ sub_nav_title }}
             </h4>
             <hr class="content-line content-line__nav u-show-on-desktop">
+        #}
             {%- for sub_nav_item in sub_nav_items %}
                 <ul class="sub-nav_menu-list
                            list__unstyled

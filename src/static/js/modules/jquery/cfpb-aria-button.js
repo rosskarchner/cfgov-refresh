@@ -9,7 +9,7 @@
 var $ = require( 'jquery' );
 
 function init() {
-
+  /*
   $.fn.cfpbAriaButton = function( userSettings ) {
 
     return this.each( function() {
@@ -56,6 +56,7 @@ function init() {
       return !typedBoolean;
     }
   };
+  */
 }
 
 module.exports = { init: init };

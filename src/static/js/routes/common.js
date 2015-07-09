@@ -32,6 +32,7 @@ $( document ).ready( function() {
   require( '../modules/show-hide-fields.js' ).init();
   require( '../modules/external-site.js' ).init();
   require( '../modules/external-site-redirect.js' ).init();
+  require( '../modules/desktop-menu-transitions.js' ).init();
 
   // Page-specific modules.
   require( './contact-us/index.js' ).init();
