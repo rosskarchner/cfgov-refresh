@@ -8,6 +8,7 @@
 var $ = require( 'jquery' );
 
 function init() {
+  /*
   var $desktopMenu = $( '.primary-nav' ),
       $desktopMenuTrigger = $( '.primary-nav_top-level-list > li' ),
       $desktopMenuChild = $( '.sub-nav_wrapper' ),
@@ -81,6 +82,7 @@ function init() {
       $desktopMenuChild.attr( 'aria-expanded', 'false' );
     }
   } );
+*/
 }
 
 // Expose public methods.

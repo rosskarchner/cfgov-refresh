@@ -23,10 +23,12 @@ function init() {
   }
 
   function clearOthers( $item, state ) {
+    console.log('clear');
     clearTimeout( navTimeOut );
     $navItems.not( $item ).attr( 'aria-expanded', false );
 
     navTimeOut = setTimeout( function() {
+      console.log('trigger');
       triggerNavItem( $item, state );
     }, duration );
   }
