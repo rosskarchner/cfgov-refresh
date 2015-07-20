@@ -3,13 +3,14 @@
 var env = require( './environment.js' );
 
 exports.config = {
-  specs: [ 'spec_suites/shared/*.js' ],
   multiCapabilities: [
     {
-      browserName: 'chrome'
+      browserName: 'chrome',
+      specs: [ 'spec_suites/shared/*.js' ],
     },
     {
-      browserName: 'firefox'
+      browserName: 'firefox',
+      specs: [ 'spec_suites/shared/*.js' ],
     },
     // Large Screen only tests
     {
