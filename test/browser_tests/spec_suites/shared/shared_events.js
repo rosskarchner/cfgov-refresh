@@ -18,7 +18,7 @@ describe( 'Events Landing page', function() {
   } );
 
   it( 'should include a hero', function() {
-    expect( page.hero.isPresent() ).toBeTruthy();
+    expect( page.heroElem.isPresent() ).toBeTruthy();
     expect( page.hero.map.getAttribute( 'style' ) ).toContain( googleAPI );
     expect( page.hero.heading.getText() ).toBeDefined();
     expect( page.hero.date.getText() ).toBeDefined();
