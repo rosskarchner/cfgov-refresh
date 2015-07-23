@@ -7,7 +7,7 @@ var protractor = require( 'gulp-angular-protractor' );
 var exec = require( 'child_process' ).exec;
 var config = require( '../config' ).test;
 
-gulp.task( 'unittests', function( cb ) {
+gulp.task( 'test:unit', function( cb ) {
   gulp.src( config.src )
     .pipe( istanbul( {
       includeUntested: true
@@ -32,7 +32,7 @@ gulp.task( 'unittests', function( cb ) {
     } );
 } );
 
-gulp.task( 'browsertests', function() {
+gulp.task( 'test:browser', function() {
   gulp.src( config.tests + '/browser_tests/spec_suites/*.js' )
     .pipe( protractor( {
         configFile:          config.tests + '/browser_tests/conf.js',
@@ -41,7 +41,7 @@ gulp.task( 'browsertests', function() {
     .on( 'error', function( e ) { throw e; } );
 } );
 
-gulp.task( 'macrotests', function( cb ) {
+gulp.task( 'test:macro', function( cb ) {
   exec( 'python ' + config.tests + '/macro_tests/test_macros.py',
     function( err, stdout, stderr ) {
       console.log( stdout );
@@ -51,7 +51,7 @@ gulp.task( 'macrotests', function( cb ) {
   );
 } );
 
-gulp.task( 'processortests', function( cb ) {
+gulp.task( 'test:processor', function( cb ) {
   exec( 'python ' + config.tests + '/processor_tests/test_processors.py',
     function( err, stdout, stderr ) {
       console.log( stdout );
@@ -63,9 +63,9 @@ gulp.task( 'processortests', function( cb ) {
 
 gulp.task( 'test',
   [
-    'unittests',
-    'browsertests',
-    'macrotests',
-    'processortests'
+    'test:unit',
+    'test:browser',
+    'test:macro',
+    'test:processor'
   ]
 );
