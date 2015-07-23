@@ -2,4 +2,13 @@
 
 var gulp = require( 'gulp' );
 
-gulp.task( 'default', [ 'styles', 'scripts', 'images', 'copy' ] );
+gulp.task( 'build',
+  [
+    'styles',
+    'scripts',
+    'images',
+    'copy'
+  ]
+);
+
+gulp.task( 'default', [ 'build' ] );

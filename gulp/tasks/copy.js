@@ -16,6 +16,16 @@ gulp.task( 'copy:files', function() {
     } ) );
 } );
 
+gulp.task( 'copy:legacy', function() {
+  return gulp.src( config.legacy.src )
+    .pipe( changed( config.legacy.dest ) )
+    .on( 'error', handleErrors )
+    .pipe( gulp.dest( config.legacy.dest ) )
+    .pipe( browserSync.reload( {
+      stream: true
+    } ) );
+} );
+
 gulp.task( 'copy:js', function() {
   return gulp.src( config.js.src )
     .pipe( changed( config.js.dest ) )
@@ -59,6 +69,7 @@ gulp.task( 'copy:pdffonts', function() {
 gulp.task( 'copy',
   [
     'copy:files',
+    'copy:legacy',
     'copy:js',
     'copy:icons',
     'copy:pdfcss',

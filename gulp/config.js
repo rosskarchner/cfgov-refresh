@@ -48,6 +48,9 @@ module.exports = {
     src:   loc.src + '/static/js/**/*.js',
     tests: loc.test
   },
+  clean: {
+    dest: loc.dist
+  },
   styles: {
     cwd:      loc.src + '/static/css',
     src:      '/main.less',
@@ -80,14 +83,15 @@ module.exports = {
     files: {
       src: [
         loc.src + '/**/*.html',
-        loc.src + '/_*/*',
-        loc.src + '/static-legacy/**/*',
+        loc.src + '/_*/**/*',
         loc.src + '/robots.txt',
-        loc.src + '/_settings/mappings/*',
-        loc.src + '/static/fonts/pdfreactor/*',
         '!' + loc.src + '/vendor/**/*.html'
       ],
       dest: loc.dist
+    },
+    legacy: {
+      src:  loc.src + '/static-legacy/**/*',
+      dest: loc.dist + '/static-legacy'
     },
     js: {
       src: [
