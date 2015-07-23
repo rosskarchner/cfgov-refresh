@@ -4,7 +4,7 @@ var Footer = require( '../../page_components/footer.js' );
 
 describe( 'The Footer Component', function() {
   var _component;
-  var _linkLookupArray = ['accessibility',
+  var _linkLookupArray = [ 'accessibility',
                           'foia',
                           'office of inspector general',
                           'open government',
@@ -30,15 +30,21 @@ describe( 'The Footer Component', function() {
   );
 
   it( 'should include navLinks and navLinks should be valid', function() {
-      _component.navLinks.count().then( function( count ){
-        expect( count > 0 ).toBe( true );
+    _component.navLinks.count().then( function( count ) {
+      expect( count > 0 ).toBe( true );
+    } );
+
+    _component.navLinks.each( function( element ) {
+
+      /* eslint-disable max-nested-callbacks */
+      element.getText().then( function( text ) {
+        expect( _linkLookupArray.indexOf( text.toLowerCase() ) > 0 )
+        .toBe( true );
       } );
 
-      _component.navLinks.each( function( element, index ) {
-        element.getText().then( function ( text ) {
-          expect( _linkLookupArray.indexOf( text.toLowerCase() ) > 0 ).toBe( true );
-        } )
-      } );
+      /* eslint-enable max-nested-callbacks */
+    } );
+
   } );
 
   it( 'should include post', function() {
