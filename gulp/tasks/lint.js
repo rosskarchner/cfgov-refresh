@@ -19,7 +19,7 @@ gulp.task( 'lint', [
  * Lints the gulpfile for errors
  */
 gulp.task( 'lint:gulp', function() {
-  gulp.src( config.gulp )
+  return gulp.src( config.gulp )
     .pipe( eslint() )
     .pipe( eslint.format() )
     .on( 'error', handleErrors );
@@ -30,7 +30,7 @@ gulp.task( 'lint:gulp', function() {
  * Lints the source js files for errors
  */
 gulp.task( 'lint:src', function() {
-  gulp.src( config.src )
+  return gulp.src( config.src )
     .pipe( eslint() )
     .pipe( eslint.format() )
     .on( 'error', handleErrors );
