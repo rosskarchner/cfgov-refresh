@@ -1,3 +1,5 @@
+'use strict';
+
 var Office = require( '../../page_objects/page_office.js' );
 
 describe( 'The offices template', function() {

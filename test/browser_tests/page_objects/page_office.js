@@ -1,9 +1,11 @@
+'use strict';
+
 function OfficePage() {
   this.get = function( officePage ) {
     var examplePages = {
-        ProjectCatalyst: '/offices/project-catalyst/',
+        ProjectCatalyst:            '/offices/project-catalyst/',
         OfficeOfFinancialEducation: '/offices/office-of-financial-education/',
-        PlainWriting: '/offices/plain-writing/'
+        PlainWriting:               '/offices/plain-writing/'
     };
 
     browser.get( examplePages[officePage] );
@@ -13,7 +15,7 @@ function OfficePage() {
 
   this.mainTitle = element( by.css( '.qa-main-title' ) );
 
-  this.introText = element( by.css( '.office_intro-text') );
+  this.introText = element( by.css( '.office_intro-text' ) );
 
   // TODO: Include show_subscription when page that uses this value is found.
   // this.subscription = element( by.css( '') );
