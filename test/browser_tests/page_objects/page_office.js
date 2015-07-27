@@ -39,8 +39,7 @@ function OfficePage() {
   this.resourceLink = element( by.css( '.qa-resource-link' ) );
 
   // Check subpages against /plain-writing/
-  this.subpages = element( by.css( '.qa-subpage h2' ) );
-
+  //this.subpages = element( by.css( '.qa-subpage h2' ) );
 
 }
 
