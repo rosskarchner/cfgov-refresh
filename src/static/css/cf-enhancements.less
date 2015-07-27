@@ -387,11 +387,12 @@ tbody {
     &__row-links {
       .respond-to-min(960px, {
           tr:hover {
-              background: @tr-link-bg-hover;
-              cursor: pointer;
-
-              a,
               td {
+                  background: @tr-link-bg-hover;
+                  color: @tr-link-color;
+                  cursor: pointer;
+              }
+              a {
                   color: @tr-link-color;
               }
           }
