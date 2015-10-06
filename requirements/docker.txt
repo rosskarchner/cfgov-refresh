@@ -1,5 +1,4 @@
 -r base.txt
 
-MySQL-python==1.2.5
 django-extensions==1.5.5
 Werkzeug==0.10.4
