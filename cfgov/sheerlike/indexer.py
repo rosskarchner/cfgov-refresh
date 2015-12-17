@@ -9,6 +9,8 @@ import glob
 import importlib
 
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.db import transaction
 
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
@@ -41,7 +43,8 @@ class ContentProcessor(object):
             return None
 
 
-def index_processor(es, index_name, processor, reindex=False):
+@transaction.atomic
+def index_processor(es, index_name, processor, reindex=False, model_map=None):
     """
     Index all the documents provided by the given content processor for
     the given index in the given Elasticsearch instance.
@@ -52,6 +55,12 @@ def index_processor(es, index_name, processor, reindex=False):
     """
     # If the mapping already exists, and we were called with the reindex
     # flag, remove the mapping.
+    if model_map and processor.name in model_map:
+        model = model_map[processor.name]
+        records = model.from_sheer_processor(processor)
+        [r.save() for r in records]
+        return True
+
     mapping = es.indices.get_mapping(index=index_name, doc_type=processor.name)
     if mapping and reindex:
         print "removing existing mapping for %s (%s)" % (processor.name, processor.processor_name)
@@ -122,7 +131,9 @@ def index(args, options):
 
     processors = settings.SHEER_PROCESSORS
 
-    
+    all_models = [ct.model_class() for ct in ContentType.objects.all()]
+    models_for_sheer_types = {model.sheer_type:model for model in all_models if hasattr(model,'sheer_type')}
+
     selected_processor_names = options.get('processors', []) or []
     if len(selected_processor_names) > 0:
 	configured_processors = [ContentProcessor(name, **details)
@@ -146,9 +157,10 @@ def index(args, options):
         index_sucess = index_processor(es,
                                        index_name,
                                        processor,
-                                       reindex=options.get('reindex'))
-        if not index_sucess:
-            failed_processors.append(processor.name)
+                                       reindex=options.get('reindex'),
+                                       model_map=models_for_sheer_types)
+    if not index_sucess:
+        failed_processors.append(processor.name)
     # Exit with an error code != 0 if there were any issues with indexing
     if failed_processors:
         sys.exit("Indexing the following processor(s) failed: {}".format(
