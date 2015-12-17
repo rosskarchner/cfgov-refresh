@@ -32,3 +32,7 @@ class SheerlikeWagtailPageMixin(models.Model):
         """Override this to populate other fields"""
 
         return {}
+
+    @staticmethod
+    def find_parent_for_document(document):
+        raise NotImplementedError("You must implement find_parent_for_document")
