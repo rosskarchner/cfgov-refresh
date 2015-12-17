@@ -1,0 +1,11 @@
+FROM centos:centos7
+
+RUN yum install -y git
+RUN curl -o /tmp/node.tgz https://nodejs.org/dist/v4.1.0/node-v4.1.0-linux-x64.tar.gz
+RUN cd / && tar -zxvf /tmp/node.tgz --strip 1
+RUN mkdir -p /src/cfgov-refresh
+WORKDIR /src/cfgov-refresh
+COPY *.sh ./
+COPY package.json ./package.json
+COPY .env_SAMPLE ./
+RUN  ./frontend.sh
