@@ -18,7 +18,7 @@ class SheerlikeWagtailPageMixin(models.Model):
         
         for document in generator:
             field_values = cls.field_values_from_sheer_document(document)
-
+            parent = cls.find_parent_for_document(document)
             document_type = processor.name
             document_id = document['_id']
             instances.append(cls(sheer_document_id=document_id,
