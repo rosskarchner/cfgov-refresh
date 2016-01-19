@@ -261,6 +261,7 @@ Given the `MAJOR.MINOR.PATCH` pattern, here is how we decide to increment:
 - Updated the new secondary-nav organism to use the new nav-link molecule
 - Updated the secondary-nav-toggle for new classnames
 - Changed expandable.html to be a macro for upcoming Filtered List
+- Password Policy & Lockout criteria for login, account password change & forgot my password.
 
 ### Removed
 - Removed unused exportsOverride section,
