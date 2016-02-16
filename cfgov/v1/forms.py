@@ -1,8 +1,16 @@
+import time
+from datetime import timedelta
+from itertools import chain
 from util import ERROR_MESSAGES
 
 from django import forms
 from django.db.models import Q
 from django.forms.utils import ErrorList
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.contrib.auth import authenticate
+from django.conf import settings
 from django.forms import widgets
 
 from sheerlike.templates import date_formatter
@@ -10,6 +18,89 @@ from .models import ref
 from .models.learn_page import AbstractFilterPage
 from .util.util import most_common
 
+
+# importing wagtail.wagtailadmin.forms at module load time seems to have
+# caused some trouble with the translation subsystem being invoked before
+# it's ready-- so I've wrapped it in a function
+def login_form():
+    from wagtail.wagtailadmin import forms as wagtail_adminforms
+
+    from .models import base
+
+    class LoginForm(wagtail_adminforms.LoginForm):
+
+        def clean(self):
+            username = self.cleaned_data.get('username')
+            password = self.cleaned_data.get('password')
+
+            if username and password:
+                self.user_cache = authenticate(username=username,
+                                               password=password)
+
+                if (self.user_cache is None and username is not None):
+                    UserModel = get_user_model()
+
+                    try:
+                        user = UserModel._default_manager.get(
+                                username=username)
+                    except ObjectDoesNotExist:
+                        raise forms.ValidationError(
+                            self.error_messages['invalid_login'],
+                            code='invalid_login',
+                            params={'username':
+                                    self.username_field.verbose_name
+                                    },
+                        )
+
+                    # fail fast if user is already blocked for some other
+                    # reason
+                    self.confirm_login_allowed(user)
+
+                    fa, created = base.FailedLoginAttempt.objects.\
+                        get_or_create(user=user)
+                    now = time.time()
+                    fa.failed(now)
+                    # Defaults to a 2 hour lockout for a user
+                    time_period = now - int(settings.LOGIN_FAIL_TIME_PERIOD)
+                    attempts_allowed = int(settings.LOGIN_FAILS_ALLOWED)
+                    attempts_used = len(fa.failed_attempts.split(','))
+
+                    if fa.too_many_attempts(attempts_allowed, time_period):
+                        dt_now = timezone.now()
+                        lockout_expires = dt_now + timedelta(seconds=settings.LOGIN_FAIL_TIME_PERIOD)
+                        lockout = user.temporarylockout_set.create(expires_at=lockout_expires)
+                        lockout.save()
+                        raise ValidationError("This account is temporarily locked; please try later or <a href='/admin/password_reset/' style='color:white;font-weight:bold'>reset your password</a>")
+                    else:
+                        fa.save()
+                        raise ValidationError('Login failed. %s more attempts until your account will be temporarily locked.' % (attempts_allowed-attempts_used))
+
+                else:
+                    self.confirm_login_allowed(self.user_cache)
+
+                    dt_now = timezone.now()
+                    try:
+                        current_password_data = self.user_cache.passwordhistoryitem_set.latest()
+                    
+                        if dt_now > current_password_data.expires_at:
+                            raise ValidationError("This account is temporarily locked; please try later or <a href='/admin/password_reset/' style='color:white;font-weight:bold'>reset your password</a>")
+
+                    except ObjectDoesNotExist:
+                        pass
+
+                    return self.cleaned_data
+
+        def confirm_login_allowed(self, user):
+            super(LoginForm, self).confirm_login_allowed(user)
+            now = timezone.now()
+
+            lockout_query = user.temporarylockout_set.filter(expires_at__gt=now)
+
+            if lockout_query.count() > 0 :
+                raise ValidationError("This account is temporarily locked; please try later or <a href='/admin/password_reset/' style='color:white;font-weight:bold'>reset your password</a>")
+
+
+    return LoginForm
 
 class FilterErrorList(ErrorList):
     def __str__(self):
@@ -113,9 +204,13 @@ class FilterableListForm(forms.Form):
 
     # Populate Topics' choices
     def set_topics(self, parent):
-        all_tags = [tag for tags in [page.tags.names() for page in
+        live_tags = [tag for tags in [page.tags.names() for page in
                     AbstractFilterPage.objects.live().descendant_of(
-                    parent).live()] for tag in tags]
+                    parent)] for tag in tags]
+        shared_tags = [tag for tags in [page.tags.names() for page in
+                       AbstractFilterPage.objects.descendant_of(parent)
+                       if page.shared] for tag in tags]
+        all_tags = list(chain(live_tags, shared_tags))
         # Orders by most to least common tags
         options = most_common(all_tags)
         most = [(option, option) for option in options[:3]]
@@ -183,10 +278,6 @@ class FilterableListForm(forms.Form):
                     final_query &= \
                         Q((query, self.cleaned_data.get(field_name)))
         return final_query
-
-    # Returns the field to order the list by
-    def get_order_attr(self):
-        return 'date_published'
 
     # Returns a list of query strings to associate for each field, ordered by
     # the field declaration for the form. Note: THEY MUST BE ORDERED IN THE
