@@ -90,6 +90,7 @@ cfgov/f/
 images/
 documents/
 original_images/
+ansible/roles/*
 
 # Unit test / coverage reports
 #################
