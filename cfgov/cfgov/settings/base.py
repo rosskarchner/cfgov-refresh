@@ -83,8 +83,6 @@ MIDDLEWARE_CLASSES = (
 
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     'transition_utilities.middleware.RewriteNemoURLsMiddleware',
-    'timezone_utilities.middleware.TimezoneMiddleware',
-
 )
 
 ROOT_URLCONF = 'cfgov.urls'
@@ -144,7 +142,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Eastern'
 
 USE_I18N = True
 
