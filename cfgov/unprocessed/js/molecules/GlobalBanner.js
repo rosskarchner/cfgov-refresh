@@ -23,7 +23,7 @@ var webStorageProxy = require( '../modules/util/web-storage-proxy' );
 function GlobalBanner( element ) {
 
   var BASE_CLASS = 'm-global-banner';
-  var EXPANDED_STATE = 'betaBannerIsExpanded';
+  var EXPANDED_STATE = 'globalBannerIsExpanded';
 
   var _dom = atomicHelpers.checkDom( element, BASE_CLASS, 'GlobalBanner' );
   var _expandable;
