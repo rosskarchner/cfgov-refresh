@@ -216,21 +216,6 @@ SHEER_PROCESSORS = \
             "processor": "processors.wordpress_contact",
             "mappings": MAPPINGS.child("contact.json")
         },
-        "history": {
-            "url": "$WORDPRESS/api/get_posts/?post_type=history",
-            "processor": "processors.wordpress_history",
-            "mappings": MAPPINGS.child("history.json")
-        },
-        "sub_page": {
-            "url": "$WORDPRESS/api/get_posts/?post_type=sub_page",
-            "processor": "processors.wordpress_sub_page",
-            "mappings": MAPPINGS.child("sub_page.json")
-        },
-        "office": {
-            "url": "$WORDPRESS/api/get_posts/?post_type=office",
-            "processor": "processors.wordpress_office",
-            "mappings": MAPPINGS.child("office.json")
-        },
         "orgmember": {
             "url": "$WORDPRESS/api/get_posts/?post_type=orgmember",
             "processor": "processors.wordpress_orgmember",
@@ -256,26 +241,11 @@ SHEER_PROCESSORS = \
             "processor": "processors.wordpress_newsroom",
             "mappings": MAPPINGS.child("newsroom.json")
         },
-        "views": {
-            "url": "$WORDPRESS/api/get_posts/?post_type=view",
-            "processor": "processors.wordpress_view",
-            "mappings": MAPPINGS.child("views.json")
-        },
         "featured_topic": {
             "url": "$WORDPRESS/api/get_posts/?post_type=featured_topic",
             "processor": "processors.wordpress_featured_topic",
             "mappings": MAPPINGS.child("featured_topic.json")
         },
-        "faq": {
-            "url": "$WORDPRESS/api/get_posts/?post_type=faq",
-            "processor": "processors.wordpress_faq",
-            "mappings": MAPPINGS.child("faq.json")
-        },
-        "report": {
-            "url": "$WORDPRESS/api/get_posts/?post_type=cfpb_report",
-            "processor": "processors.wordpress_cfpb_report",
-            "mappings": MAPPINGS.child("report.json")
-        }
     }
 
 SHEER_ELASTICSEARCH_SETTINGS = \
