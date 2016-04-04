@@ -69,7 +69,7 @@ function stylesOnDemand() {
     .on( 'error', handleErrors )
     .pipe( $.autoprefixer( {
       browsers: [ 'last 2 version',
-                  'not ie <= 8',
+                  'ie 7-8',
                   'android 4',
                   'BlackBerry 7',
                   'BlackBerry 10' ]
