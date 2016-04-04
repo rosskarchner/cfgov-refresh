@@ -1,4 +1,11 @@
+{# ==========================================================================
+
+   Minimal template for rendering out an atomic component in sudo isolation.
+
+   ========================================================================== #}
+
 {% set atomic_type = request.GET.get( 'atomic' ) %}
+{# Set to the Header organism by default. #}
 {% set atomic_type = 'header' if atomic_type == None else atomic_type %}
 
 <!DOCTYPE html>
@@ -48,30 +55,21 @@
 
     {# TODO: Explicit favicon link needed for testing. Remove for production. #}
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-
-<!--
-    ======
-    STYLES
-    ======
-    The number of stylesheets here must be kept to a minimum.
-    Unless adding a significant amount of CSS that is specific to a single page or section of the site,
-    all new styles should be added to cfgov/v1/unprocessed/css/main.less.
--->
-
-{% block css %}
-<!--[if lt IE 9]>      <link rel="stylesheet" href="{{ static('css/main.ie.css') }}"> <![endif]-->
-<!--[if gt IE 8]><!--> <link rel="stylesheet" href="{{ static('css/' + atomic_type + '.css') }}"> <!--<![endif]-->
-{% endblock css %}
-
-<!--
+{#
     ============
-    HEAD SCRIPTS
+    ONDEMAND CSS
     ============
-    The following scripts must be included in the head. DO NOT ADD ANY MORE.
-    All other scripts should go before the closing body tag.
-    If you come across a script that makes a convincing case to be included in
-    the head, then file an issue or PR to discuss including it.
--->
+    The atomic CSS file. This includes legacy IE-specific prefixing.
+#}
+<link rel="stylesheet" href="{{ static('css/' + atomic_type + '.css') }}">
+
+{#
+    ================
+    POLYFILL SCRIPTS
+    ================
+    The following scripts must be included in the <head>
+    and are used to polyfill missing functionality in legacy browsers.
+#}
     {# Customized Modernizr build that includes html5shiv.
        Built via gulp-modernizer in `scripts.js` task. #}
     <script src="{{ static('js/modernizr.min.js') }}"></script>
@@ -85,11 +83,21 @@
     <![endif]-->
 
     <!--[if IE 9]><script src="{{ static('js/ie/common.ie.js') }}"></script><![endif]-->
-
+{#
+    ====================
+    END POLYFILL SCRIPTS
+    ====================
+#}
 </head>
 
 <body>
 
+{#
+    =================
+    ONDEMAND TEMPLATE
+    =================
+    The jinja template and associate HTML to include for an atomic component.
+#}
 {% if atomic_type == 'header' %}
 
     {# Overlay for the page. Used for the mobile mega menu. #}
@@ -100,18 +108,16 @@
 
 {% endif %}
 
-<!--
-    ============
-    BODY SCRIPTS
-    ============
-    The number of scripts here must be kept to a minimum.
--->
-
-{% block javascript %}
-<script type='text/javascript'>
-    {% include '/js/atomic/' + atomic_type + '.js' ignore missing %}
-</script>
-{% endblock javascript %}
+{#
+    ===============
+    ONDEMAND SCRIPT
+    ===============
+    The atomic JS file. This needs to be delivered either:
+    (a) At the bottom of the <body> (as shown).
+    (b) In the <head> with the `defer` and `async` attributes
+        set on the <script> tag.
+#}
+<script type="text/javascript" src="{{ static('js/atomic/' + atomic_type + '.js') }}"></script>
 
 </body>
 
