@@ -84,6 +84,8 @@
     </script>
     <![endif]-->
 
+    <!--[if IE 9]><script src="{{ static('js/ie/common.ie.js') }}"></script><![endif]-->
+
 </head>
 
 <body>
@@ -107,7 +109,7 @@
 
 {% block javascript %}
 <script type='text/javascript'>
-    {% include '/js/atomic/' + atomic_type + '.js' %}
+    {% include '/js/atomic/' + atomic_type + '.js' ignore missing %}
 </script>
 {% endblock javascript %}
 
