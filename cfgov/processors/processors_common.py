@@ -24,5 +24,3 @@ def fix_link(link):
         new_href = urlunsplit((None, None, urldata.path, urldata.query,
                               urldata.fragment))
         link['href'] = new_href
-    else:
-        return link
