@@ -12,11 +12,12 @@ from wagtail.wagtailadmin.edit_handlers import TabbedInterface, ObjectList
 
 from . import base, molecules, organisms, ref
 from .learn_page import AbstractFilterPage
+from .feeds import FilterableFeedPageMixin
 from .. import forms
 from ..util import filterable_context
 
 
-class BrowseFilterablePage(base.CFGOVPage):
+class BrowseFilterablePage(FilterableFeedPageMixin, base.CFGOVPage):
     header = StreamField([
         ('text_introduction', molecules.TextIntroduction()),
         ('featured_content', molecules.FeaturedContent()),
@@ -97,7 +98,7 @@ class NewsroomLandingPage(BrowseFilterablePage):
             except base.CFGOVPage.DoesNotExist:
                 print 'Blog does not exist'
 
-        return AbstractFilterPage.objects.live_shared(hostname).filter(newsroom_q | blog_q).order_by('-date_published')
+        return AbstractFilterPage.objects.live_shared(hostname).filter(newsroom_q | blog_q).distinct().order_by('-date_published')
 
 
     def get_form_class(self):
