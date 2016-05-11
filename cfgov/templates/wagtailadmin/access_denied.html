@@ -1,0 +1,12 @@
+{% overextends "wagtailadmin/login.html" %}
+{% load i18n admin_static %}
+
+
+{% block furniture %}
+    <div class="content-wrapper">
+        <h1>Sorry, you do not have permission to access this page.</h1>
+        <h2>You may want to <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a> and log in as a user with the proper permissions.</h2>
+        <div class="menu-item"><a href="/admin/logout">Log out</a></div>
+    </div>
+{% endblock %}
+
