@@ -24,6 +24,7 @@ def share_the_page(request, page):
     check_permissions(parent_page, request.user, is_publishing, is_sharing)
     share(page, is_sharing, is_publishing)
     configure_page_revision(page, is_publishing)
+    flush_akamai(page, is_publishing)
 
 
 # Make sure permissions are set to perform actions
@@ -44,14 +45,12 @@ def share(page, is_sharing, is_publishing):
     page.save()
 
 
-# If the page isn't being published but the page is live and the editor
-# wants to share updated content that doesn't show on the production site,
-# we must set the page.live to True, delete the latest revision, and save
-# a new revision with `live` = False. This doesn't affect the page's published
-# status, as the saved page object in the database still has `live` equal to
-# True and we're never commiting the change. As seen in CFGOVPage's route
-# method, `route()` will select the latest revision of the page where `live`
-# is set to True and return that revision as a page object to serve the request with.
+# `CFGOVPage.route()` will select the latest revision of the page where `live`
+# is set to True and return that revision as a page object to serve the request
+# so here we configure the latest revision to fall in line with that logic.
+#
+# This is also used as a signal callback when publishing in code or via
+# management command like publish_scheduled_pages.
 def configure_page_revision(page, is_publishing):
     if not is_publishing:
         page.live = False
@@ -60,18 +59,19 @@ def configure_page_revision(page, is_publishing):
     content_json['live'], content_json['shared'] = page.live, page.shared
     latest.content_json = json.dumps(content_json)
     latest.save()
-    if is_publishing:
-        latest.publish()
-        if settings.ENABLE_AKAMAI_CACHE_PURGE:
-            from publish_eccu.publish import publish as akamai_cache_reset
 
-            url_paths = [page.url_path.replace('cfgov/', '')]
-            if url_paths[0] == '/':
-                is_home_page = True
-            else:
-                is_home_page = False
 
-            akamai_cache_reset(url_paths, invalidate_root=is_home_page, user_email=latest.user.email)
+def flush_akamai(page, is_publishing):
+    if is_publishing and settings.ENABLE_AKAMAI_CACHE_PURGE:
+        from publish_eccu.publish import publish as akamai_cache_reset
+
+        url_paths = [page.url_path.replace('cfgov/', '')]
+        if url_paths[0] == '/':
+            is_home_page = True
+        else:
+            is_home_page = False
+
+        akamai_cache_reset(url_paths, invalidate_root=is_home_page, user_email=page.owner.email)
 
 
 @hooks.register('before_serve_page')
