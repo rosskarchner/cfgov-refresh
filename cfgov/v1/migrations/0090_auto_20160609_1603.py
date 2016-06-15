@@ -37,23 +37,24 @@ def convert_datetimes(apps, schema_editor):
         localized_dt = local.localize(naive)
         return localized_dt.astimezone(pytz.utc)
 
-    home = HomePage.objects.get(slug='cfgov')
-    for update in home.latest_updates:
-        if update.block_type == 'posts':
-            for post in update.value:
-                post['date'] = timezone_conversion(post['date'])
-    home.save()
-    revision = PageRevision.objects.filter(page=home).order_by('-id').first()
-    content = json.loads(revision.content_json)
-    if 'latest_updates' in content:
-        latest_updates = json.loads(content['latest_updates'])
-        for i, update in enumerate(latest_updates):
-            for j, value in enumerate(update['value']):
-                if value['date']:
-                    latest_updates[i]['value'][j]['date'] = timezone_conversion(value['date']).isoformat()
-        content['latest_updates'] = json.dumps(latest_updates)
-        revision.content_json = json.dumps(content)
-    revision.save()
+    home = HomePage.objects.filter(slug='cfgov').first()
+    if home:
+        for update in home.latest_updates:
+            if update.block_type == 'posts':
+                for post in update.value:
+                    post['date'] = timezone_conversion(post['date'])
+        home.save()
+        revision = PageRevision.objects.filter(page=home).order_by('-id').first()
+        content = json.loads(revision.content_json)
+        if 'latest_updates' in content:
+            latest_updates = json.loads(content['latest_updates'])
+            for i, update in enumerate(latest_updates):
+                for j, value in enumerate(update['value']):
+                    if value['date']:
+                        latest_updates[i]['value'][j]['date'] = timezone_conversion(value['date']).isoformat()
+            content['latest_updates'] = json.dumps(latest_updates)
+            revision.content_json = json.dumps(content)
+        revision.save()
 
     if settings.DEBUG:
         for demo in DemoPage.objects.all():
