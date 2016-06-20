@@ -66,6 +66,14 @@ def convert_datetimes(apps, schema_editor):
             demo.save()
 
     for page in Page.objects.all():
+        if page.go_live_at:
+            page.go_live_at = timezone_conversion(page.go_live_at)
+            for revision in PageRevision.objects.filter(page=page).order_by('-id'):
+                revision.approved_go_live_at = page.go_live_at
+                revision.save()
+        if page.expire_at:
+            page.expire_at = timezone_conversion(page.expire_at)
+        page.save()
         specific_page = specific(page)
         if 'learn_page' in str(type(specific_page)):
             for block in specific_page.header:
