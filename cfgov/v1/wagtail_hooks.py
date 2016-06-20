@@ -52,11 +52,10 @@ def share(page, is_sharing, is_publishing):
 # This is also used as a signal callback when publishing in code or via
 # management command like publish_scheduled_pages.
 def configure_page_revision(page, is_publishing):
-    if not is_publishing:
-        page.live = False
     latest = page.get_latest_revision()
     content_json = json.loads(latest.content_json)
-    content_json['live'], content_json['shared'] = page.live, page.shared
+    content_json['live'] = is_publishing
+    content_json['shared'] = page.shared
     latest.content_json = json.dumps(content_json)
     latest.save()
 
