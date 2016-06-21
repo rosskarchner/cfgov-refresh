@@ -59,18 +59,18 @@ module.exports = {
     }
   },
   legacy: {
-    cwd: paths.legacy + '/static',
-    dest: paths.legacy + '/static',
+    cwd: paths.legacy,
+    dest: paths.processed,
     scripts: [
-      paths.legacy + '/static/nemo/_/js/jquery-1.5.1.min.js',
-      paths.legacy + '/static/nemo/_/js/jquery.easing.1.3.js',
-      paths.legacy + '/static/nemo/_/js/jquery.fitvids.min.js',
-      paths.legacy + '/static/nemo/_/js/appendAround.js',
-      paths.legacy + '/static/nemo/_/js/plugins.js',
-      paths.legacy + '/static/nemo/_/js/main.js',
-      paths.legacy + '/static/nemo/_/js/jquery.youtube-find-and-track.js',
-      paths.legacy + '/static/nemo/_/js/AnalyticsTarget.js',
-      paths.legacy + '/static/nemo/_/js/analytics-es.js'
+      paths.legacy + '/nemo/_/js/jquery-1.5.1.min.js',
+      paths.legacy + '/nemo/_/js/jquery.easing.1.3.js',
+      paths.legacy + '/nemo/_/js/jquery.fitvids.min.js',
+      paths.legacy + '/nemo/_/js/appendAround.js',
+      paths.legacy + '/nemo/_/js/plugins.js',
+      paths.legacy + '/nemo/_/js/main.js',
+      paths.legacy + '/nemo/_/js/jquery.youtube-find-and-track.js',
+      paths.legacy + '/nemo/_/js/AnalyticsTarget.js',
+      paths.legacy + '/nemo/_/js/analytics-es.js'
     ]
   },
   images: {
