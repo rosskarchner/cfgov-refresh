@@ -40,7 +40,7 @@ class AbstractFilterPage(CFGOVPage):
     # General content tab panels
     content_panels = CFGOVPage.content_panels + [
         StreamFieldPanel('header'),
-        StreamFieldPanel('content'),
+        # StreamFieldPanel('content'),
     ]
 
     # Configuration tab panels

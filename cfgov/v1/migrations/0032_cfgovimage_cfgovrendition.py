@@ -14,16 +14,16 @@ def migrate_images_data(apps, schema_editor):
     UserModel = apps.get_model(settings.AUTH_USER_MODEL)
 
     # Migrate image data
-    for image in wagtail.wagtailimages.models.Image.objects.all():
-        new_image = CFGOVImageModel()
-        for field in ['title', 'file', 'width', 'height', 'focal_point_x',
-                      'focal_point_y', 'focal_point_width',
-                      'focal_point_height', 'file_size', 'tags']:
-            value = getattr(image, field)
-            setattr(new_image, field, value)
-        user = UserModel.objects.get(id=image.uploaded_by_user.id)
-        new_image.uploaded_by_user = user
-        new_image.save()
+    # for image in wagtail.wagtailimages.models.Image.objects.all():
+    #     new_image = CFGOVImageModel()
+    #     for field in ['title', 'file', 'width', 'height', 'focal_point_x',
+    #                   'focal_point_y', 'focal_point_width',
+    #                   'focal_point_height', 'file_size', 'tags']:
+    #         value = getattr(image, field)
+    #         setattr(new_image, field, value)
+    #     user = UserModel.objects.get(id=image.uploaded_by_user.id)
+    #     new_image.uploaded_by_user = user
+    #     new_image.save()
 
 
 class Migration(migrations.Migration):
