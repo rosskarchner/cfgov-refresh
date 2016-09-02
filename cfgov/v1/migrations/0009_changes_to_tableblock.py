@@ -14,7 +14,7 @@ import v1.atomic_elements.organisms
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('v1', '0007_auto_20160823_1608'),
+        ('v1', '0008_update_tables_to_tableblocks'),
     ]
 
     operations = [
