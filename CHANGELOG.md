@@ -13,23 +13,11 @@ Given the `MAJOR.MINOR.PATCH` pattern, here is how we decide to increment:
 
 ---------------------------------------
 
-## Unreleased
-
-### Added
-- Added smoke-test scripts to check static assets and base page responses.
-- new dependency: django-htmlmin, which compresses outgoing HTML
-
-### Changed
-- Update base.html to conditionally include es5 script.
-- Wagtail upgraded to version 1.6.3.
-
-### Removed
-- Removed Handlebars from `package.json` and `cf_notifier.js`.
-
 ## 3.11.1
 
 ### Changed
-- comparisontool updated to 1.2.7
+- update comparisontool to 1.2.7
+
 
 ## 3.11.0
 
@@ -48,11 +36,6 @@ Given the `MAJOR.MINOR.PATCH` pattern, here is how we decide to increment:
 - Moved careers page creation from Django data migrations to standalone Python scripts.
 - Use HTTPS when linking to search.consumerfinance.gov.
 
-## 3.10.10
-
-### Fixed
-- incorrectly used static tag on housing counselor page
-
 ## 3.10.9
 
 ### Added
@@ -60,7 +43,6 @@ Given the `MAJOR.MINOR.PATCH` pattern, here is how we decide to increment:
 
 ### Fixed
 - Update links in TableBlocks that reference internal documents or pages & have no href
-
 
 ## 3.10.8
 
