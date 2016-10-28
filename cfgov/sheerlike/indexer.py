@@ -127,7 +127,7 @@ def index(args, options):
             es.indices.create(index=index_name)
 
     processors = settings.SHEER_PROCESSORS
-    for slug, site_path in settings.SHEER_SITES.items():
+    for slug, site_path in entrypoints finder:
         sys.path.append(site_path.child('_lib'))
         processors_path = Path(site_path, '_settings/processors.json')
         if processors_path.exists():

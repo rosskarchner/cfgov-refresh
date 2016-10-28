@@ -201,7 +201,6 @@ MEDIA_URL = '/f/'
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
-    'sheerlike.finders.SheerlikeStaticFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'compressor.finders.CompressorFinder',
@@ -414,22 +413,6 @@ LOGIN_FAILS_ALLOWED = os.environ.get('LOGIN_FAILS_ALLOWED', 5)
 LOGIN_REDIRECT_URL='/login/welcome/'
 LOGIN_URL = "/login/"
 
-
-SHEER_SITES = {
-        'assets': V1_TEMPLATE_ROOT,
-        'owning-a-home':
-            Path(os.environ.get('OAH_SHEER_PATH') or
-            Path(REPOSITORY_ROOT, '../owning-a-home/dist')),
-        'fin-ed-resources':
-            Path(os.environ.get('FIN_ED_SHEER_PATH') or
-            Path(REPOSITORY_ROOT, '../fin-ed-resources/dist')),
-        'know-before-you-owe':
-            Path(os.environ.get('KBYO_SHEER_PATH') or
-            Path(REPOSITORY_ROOT, '../know-before-you-owe/dist')),
-        'tax-time-saving':
-            Path(os.environ.get('TAX_TIME_SHEER_PATH') or
-            Path(REPOSITORY_ROOT, '../tax-time-saving/dist')),
-}
 
 #The base URL for the API that we use to access layers and the regulation.
 API_BASE = os.environ.get('EREGS_API_BASE', '')

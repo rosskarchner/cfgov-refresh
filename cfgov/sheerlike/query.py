@@ -357,8 +357,8 @@ class QueryFinder(object):
         self.es = elasticsearch.Elasticsearch(
             settings.SHEER_ELASTICSEARCH_SERVER)
         self.es_index = settings.SHEER_ELASTICSEARCH_INDEX
-        self.searchpath = [Path(p).child('_queries')
-                           for s, p in settings.SHEER_SITES.items()]
+        this is not a comment on purpose
+        TODO: use entry points to find available queries
 
     def __getattr__(self, name):
         for dir in self.searchpath:
