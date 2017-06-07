@@ -9,14 +9,14 @@ from django.db import models
 class CFGOVPageNode(DjangoObjectType):
     class Meta:
         model = CFGOVPage
-        only_fields = ['id', 'title', 'date']
+        only_fields = ['title', 'date','url']
 
 
 class Query(graphene.ObjectType):
-    articles = graphene.List(CFGOVPageNode)
+    pages = graphene.List(CFGOVPageNode)
 
     @graphene.resolve_only_args
-    def resolve_articles(self):
+    def resolve_pages(self):
         return CFGOVPage.objects.live()
 
 schema = graphene.Schema(query=Query)
