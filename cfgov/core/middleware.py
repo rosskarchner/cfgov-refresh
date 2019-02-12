@@ -25,7 +25,7 @@ def should_parse_links(request_path, content_type):
         if request_path.startswith(path):
             return False
 
-    if settings.DEFAULT_CONTENT_TYPE not in content_type:
+    if settings.DEFAULT_CONTENT_TYPE not in (content_type or ''):
         return False
 
     return True
@@ -61,7 +61,7 @@ def parse_links(html, encoding=None):
 
 class ParseLinksMiddleware(object):
     def process_response(self, request, response):
-        if should_parse_links(request.path, response['content-type']):
+        if should_parse_links(request.path, response.get('content-type')):
             response.content = parse_links(
                 response.content,
                 encoding=response.charset

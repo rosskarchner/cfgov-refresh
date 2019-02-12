@@ -101,7 +101,8 @@
     "preinstall": "node scripts/preinstall.js",
     "postinstall": "yarn run enforce && node scripts/yarn/apps-install",
     "test": "snyk test",
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "heroku-postbuild": "gulp build"
   },
   "snyk": true
 }
