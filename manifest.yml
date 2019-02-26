@@ -1,0 +1,5 @@
+---
+applications:
+- name: cfgov
+  memory: 1024M
+  instances: 1

@@ -1,0 +1,7 @@
+node_modules
+.tox
+.git
+npm-packages-offline-cache
+docs
+test
+cfgov/unprocessed
